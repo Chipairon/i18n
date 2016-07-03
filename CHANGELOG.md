@@ -1,5 +1,7 @@
 # master
 
+* Drop support to Ruby versions not supported by rails anymore
+* Drop support to Rails 3.x and 4.0
 * `Hash#slice` ignores non existing keys.
 
 # 0.7.0
