@@ -59,6 +59,7 @@ module I18n
 
         def store_translations(locale, data, options = {})
           escape = options.fetch(:escape, true)
+          data = I18n.deep_symbolize_keys(data)
           flatten_translations(locale, data, escape, @subtrees).each do |key, value|
             key = "#{locale}.#{key}"
 
@@ -66,7 +67,7 @@ module I18n
             when Hash
               if @subtrees && (old_value = @store[key])
                 old_value = ActiveSupport::JSON.decode(old_value)
-                value = old_value.deep_symbolize_keys.deep_merge!(value) if old_value.is_a?(Hash)
+                value = I18n.deep_symbolize_keys(old_value).deep_merge!(value) if old_value.is_a?(Hash)
               end
             when Proc
               raise "Key-value stores cannot handle procs"
@@ -88,9 +89,11 @@ module I18n
 
         def lookup(locale, key, scope = [], options = {})
           key   = normalize_flat_keys(locale, key, scope, options[:separator])
+          key = I18n.remove_ending_separator key
+
           value = @store["#{locale}.#{key}"]
           value = ActiveSupport::JSON.decode(value) if value
-          value.is_a?(Hash) ? value.deep_symbolize_keys : value
+          value.is_a?(Hash) ? I18n.deep_symbolize_keys(value) : value
         end
       end
 

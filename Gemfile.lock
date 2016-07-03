@@ -6,8 +6,13 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
+    autotest-suffix (1.1.0)
     metaclass (0.0.4)
-    minitest (5.5.1)
+    minitest (5.9.0)
+    minitest-autotest (1.0.3)
+      minitest-server (~> 1.0)
+    minitest-server (1.0.4)
+      minitest (~> 5.0)
     mocha (1.1.0)
       metaclass (~> 0.0.1)
     rake (10.4.2)
@@ -18,8 +23,13 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  autotest-suffix
   i18n!
   minitest
+  minitest-autotest
   mocha
   rake
   test_declarative
+
+BUNDLED WITH
+   1.11.2

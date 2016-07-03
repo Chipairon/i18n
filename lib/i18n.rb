@@ -285,6 +285,29 @@ module I18n
       end
     end
 
+    def deep_symbolize_keys(hash)
+      hash.inject({}) { |result, (key, value)|
+        value = deep_symbolize_keys(value) if value.is_a?(Hash)
+        the_key = (key.to_sym rescue key) || key
+        the_key = remove_ending_separator(the_key)
+        result[the_key] = value
+        result
+      }
+    end
+
+    # If a key ends with the separator, then removes the separator.
+    # This consolidates the storage and lookup of keys ending in a separator.
+    def remove_ending_separator(key)
+      if key[-1] == I18n.default_separator
+        new_key = key[0..key.length - 2]
+        if key.is_a? Symbol
+          new_key = new_key.to_sym
+        end
+        key = new_key
+      end
+      key
+    end
+
   private
 
     # Any exceptions thrown in translate will be sent to the @@exception_handler

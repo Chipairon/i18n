@@ -45,7 +45,7 @@ class I18nBackendMemoizeTest < I18nBackendSimpleTest
     assert_equal 1, I18n.backend.spy_calls
   end
 
-  test "memoize: can store and retrieve a translation which key ends with the escope separator character" do
+  def test_memoize_can_store_and_retrieve_a_translation_ending_in_separator
     store_translations :'en', :"yyy." => "yyy value"
     assert_equal("yyy value", I18n.t("yyy."))
   end

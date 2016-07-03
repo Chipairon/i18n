@@ -1,6 +1,7 @@
 .DS_Store
 test/rails/fixtures
 nbproject/
+gemfiles/vendor/**/*
 vendor/**/*
 *.swp
 pkg

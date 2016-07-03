@@ -26,6 +26,7 @@ class I18n::TestCase < TEST_CASE
   def setup
     super
     I18n.enforce_available_locales = false
+    I18n.default_separator = nil
   end
 
   def teardown

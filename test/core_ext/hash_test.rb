@@ -5,7 +5,7 @@ class I18nCoreExtHashInterpolationTest < I18n::TestCase
   test "#deep_symbolize_keys" do
     hash = { 'foo' => { 'bar' => { 'baz' => 'bar' } } }
     expected = { :foo => { :bar => { :baz => 'bar' } } }
-    assert_equal expected, hash.deep_symbolize_keys
+    assert_equal expected, I18n.deep_symbolize_keys(hash)
   end
 
   test "#slice" do
