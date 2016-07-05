@@ -23,3 +23,6 @@ DEPENDENCIES
   mocha
   rake
   test_declarative
+
+BUNDLED WITH
+   1.12.5

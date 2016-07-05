@@ -84,13 +84,9 @@ module I18n
 
         def cache_key(locale, key, options)
           # This assumes that only simple, native Ruby values are passed to I18n.translate.
-          "i18n/#{I18n.cache_namespace}/#{locale}/#{key.hash}/#{USE_INSPECT_HASH ? options.inspect.hash : options.hash}"
+          "i18n/#{I18n.cache_namespace}/#{locale}/#{key.hash}/#{options.to_s.hash}"
         end
 
-      private
-        # In Ruby < 1.9 the following is true: { :foo => 1, :bar => 2 }.hash == { :foo => 2, :bar => 1 }.hash
-        # Therefore we must use the hash of the inspect string instead to avoid cache key colisions.
-        USE_INSPECT_HASH = RUBY_VERSION <= "1.9"
     end
   end
 end
