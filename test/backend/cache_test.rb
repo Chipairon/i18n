@@ -59,9 +59,8 @@ class I18nBackendCacheTest < I18n::TestCase
   end
 
   test "adds locale and hash of key and hash of options" do
-    options = { :bar=>1 }
-    options_hash = I18n::Backend::Cache::USE_INSPECT_HASH ? options.inspect.hash : options.hash
-    assert_equal "i18n//en/#{:foo.hash}/#{options_hash}", I18n.backend.send(:cache_key, :en, :foo, options)
+    options = { :bar => 1 }
+    assert_equal "i18n//en/#{:foo.hash}/#{options.to_s.hash}", I18n.backend.send(:cache_key, :en, :foo, options)
   end
 
   test "keys should not be equal" do
